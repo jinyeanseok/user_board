@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="UserMapper">
+	
+	<insert id="userCreate">
+		insert into user(identification, password, name) 
+		values ( #{identification}, #{password}, #{name})
+	</insert>
+	
+	<select id="login" resultType="kr.co.web.domain.UserVO">
+		select identification, password, name
+		from user
+		where identification = #{identification} and password = #{password}
+	</select>
+	<!-- 
+		<select id="login" resultType="kr.co.web.domain.UserVO">
+		select identification, name
+		from user
+		where identification = #{identification} and password = #{password}
+	</select>
+	 -->
+	
+	<update id="modify">
+		update user
+		set password = #{password}
+		where name = #{name}
+	</update>
+	
+	<delete id="delete">
+		delete
+		from user
+		where identification = #{identification} and password = #{password}
+	</delete>
+</mapper>
