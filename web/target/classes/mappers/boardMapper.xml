@@ -7,8 +7,8 @@
 <mapper namespace="BoardMapper">
 
 	<insert id="create">
-		insert into board (title, contents)
-		values ( #{title}, #{contents})
+		insert into board (title, contents, name)
+		values ( #{title}, #{contents}, #{name})
 	</insert>
 	
 	<select id="read" resultType = "kr.co.web.domain.BoardVO">
@@ -35,10 +35,35 @@
 		order by board_number desc, create_date desc
 	</select>
 	
-	<select id="listPage" resultType="kr.co.web.domain.BoardVO">
+	
+	<sql id="searchCondition">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and title like concat('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and contents like concat('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'w'.toString()">
+				and name like concat('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				and (title like concat('%', #{keyword}, '%')
+					or contents like concat('%', #{keyword}, '%'))
+			</if>
+			<if test="searchType == 'all'.toString()">
+				and (title like concat('%', #{keyword}, '%')
+					or contents like concat('%', #{keyword}, '%')
+					or name like concat('%', #{keyword}, '%'))
+			</if>
+		</if>
+	</sql>
+	
+	 <select id="listPage" resultType="kr.co.web.domain.BoardVO">
 		select *
 		from board
 		where board_number > 0
+		<include refid="searchCondition"></include>
 		order by board_number desc, create_date desc
 		limit #{pageStart}, #{perPageNum}
 	</select>
@@ -46,7 +71,8 @@
 	<select id="gettotalcount" resultType="int">
 		select count(board_number)
 		from board
-		where board_number > 0;
+		where board_number > 0
+		<include refid="searchCondition"></include>
 	</select>
 	
 	<update id="viewCount" parameterType="int">

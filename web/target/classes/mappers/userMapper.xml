@@ -35,4 +35,6 @@
 		from user
 		where identification = #{identification} and password = #{password}
 	</delete>
+	
+	
 </mapper>

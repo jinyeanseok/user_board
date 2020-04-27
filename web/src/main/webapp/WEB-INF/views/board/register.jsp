@@ -18,7 +18,9 @@
 <body>
 	<h1>게시판</h1>
 	<hr/>
+	<c:if test="${msg == null}">
 	<a href="/board/listPage"><button>목록</button></a>
+	</c:if>
 	<hr/>
 	
 
@@ -26,17 +28,17 @@
 		<form method="post">
 		<div>
 			<label for="title">제목</label>
-			<input type="text" id="title" name="title" placeholder="제목" />
+			<input type="text" id="title" name="title" placeholder="제목" required/>
 		</div>
 		
 		<div>
 			<label for="contents">내용</label>
-			<textarea id="contents" name="contents" placeholder="내용"></textarea>
+			<textarea id="contents" name="contents" placeholder="내용" required></textarea>
 		</div>
 				
 		<div>
 			<label for="name">작성자</label>
-			<input type="text" id="name" name="name" value="${user.name}" readonly="readonly">
+			<input type="text" id="name" name="name" value="${user.name}" readonly="readonly" required>
 		</div>		
 		<div>
 			<button type="submit">등록</button>

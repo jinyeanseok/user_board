@@ -103,7 +103,7 @@ public class BoardController {
 	
 
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
-	public void listPage(Criteria cri, Model model) throws Exception{
+	public void listPage(Criteria cri, Model model, HttpSession session) throws Exception{
 		logger.info("listPage");
         //현재 페이지에 해당하는 게시물을 조회해 옴 
 		List<BoardVO> boards = boardService.listPage(cri);
@@ -117,6 +117,13 @@ public class BoardController {
 		pageMaker.setTotalCount(totalCount);
         //모델에 추가
 		model.addAttribute("pageMaker", pageMaker);
+		
+		Object loginInfo = session.getAttribute("user");
+		
+		if(loginInfo == null) {
+			model.addAttribute("msg", false);
+		}
+		
 	}
 	
 	

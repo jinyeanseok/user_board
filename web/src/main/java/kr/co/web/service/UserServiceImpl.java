@@ -32,4 +32,9 @@ public class UserServiceImpl implements UserService{
 	public void delete(UserVO user) throws Exception {
 		userDAO.delete(user);
 	}
+	
+	@Override
+	public UserVO idCheck(String identification) throws Exception {
+		return userDAO.idCheck(identification);
+	}
 }

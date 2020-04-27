@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.web.domain.UserVO;
@@ -60,11 +61,9 @@ public class UserController {
 	 } else {
 	  session.setAttribute("user", login);
 	  rttr.addFlashAttribute("msg", "loginTrue");
-//	  String oldPass = user.getPassword();
 	  String oldPass = login.getPassword();
 	  logger.info("로그인할 때 입력한 비밀번호" + oldPass);
 	  logger.info(login + "로그 입력");
-//	  session.setAttribute("user", oldPass);
 	 }
 	   
 	 return "redirect:/";
@@ -115,6 +114,7 @@ public class UserController {
 	 
 	 String newPass = user.getPassword();
 	 logger.info("회원탈퇴 폼에 입력한 비밀번호" + newPass);
+	 
 	 if(!(oldPass.equals(newPass))) {
 	  rttr.addFlashAttribute("msg", false);
 	  return "redirect:/user/delete";
@@ -128,6 +128,8 @@ public class UserController {
 	 
 	 return "redirect:/";
 	}
+	
+
 	
 	
 }

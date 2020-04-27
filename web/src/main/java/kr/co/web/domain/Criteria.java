@@ -6,10 +6,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class Criteria {
 	private int page;
 	private int perPageNum;
+	private String searchType;
+	private String keyword;
 	
 	public Criteria() {
 		this.page = 1;
 		this.perPageNum = 10;
+		this.searchType = null;
+		this.keyword = null;
 	}
     
 	// boardMapper.xml listPage의 pageStart를 반환
@@ -42,13 +46,58 @@ public class Criteria {
 		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + "]";
 	}
 	
+//	public String makeQuery() {
+//		UriComponents uriComponents = UriComponentsBuilder.newInstance()
+//				.queryParam("page", page)
+//				.queryParam("perPageNum", this.getPerPageNum())
+//				.build()
+//				.encode();
+//				
+//		return uriComponents.toString();
+//	}
+	
+	
+//	public String makeQuery() {
+//		UriComponentsBuilder  uriComponentsBuilder  = UriComponentsBuilder.newInstance()
+//				.queryParam("page", page)
+//				.queryParam("perPageNum", this.perPageNum);
+//		
+//		if(searchType!=null) {
+//			uriComponentsBuilder
+//				.queryParam("searchType", this.searchType)
+//				.queryParam("keyword", this.keyword);
+//		}
+//			
+//		return uriComponentsBuilder.build().encode().toString();
+//	}
+	
+	
 	public String makeQuery() {
-		UriComponents uriComponents = UriComponentsBuilder.newInstance()
+		UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.newInstance()
 				.queryParam("page", page)
-				.queryParam("perPageNum", this.getPerPageNum())
-				.build()
-				.encode();
+				.queryParam("perPageNum", this.perPageNum);
 				
-		return uriComponents.toString();
+		if (searchType!=null) {
+			uriComponentsBuilder
+					.queryParam("searchType", this.searchType)
+					.queryParam("keyword", this.keyword);
+		}
+		return uriComponentsBuilder.build().encode().toString();
+	}
+
+	public String getSearchType() {
+		return searchType;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 }

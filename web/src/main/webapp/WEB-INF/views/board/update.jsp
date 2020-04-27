@@ -19,7 +19,7 @@
 	
 </head>
 <body>
-	<h1>게시판</h1>
+	<h1>게시글 수정하기</h1>
 	<hr/>
 	
 	<div>
@@ -39,12 +39,12 @@
 	<div>
 		<div>
 			<label for="title">제목</label>
-			<input type="text" id="title" name="title" placeholder="제목" value="${boardVO.title }" />
+			<input type="text" id="title" name="title" placeholder="제목" value="${boardVO.title }" required/>
 		</div>
 		
 		<div>
 			<label for="contents">내용</label>
-			<textarea id="contents" name="contents" placeholder="내용" >${boardVO.contents}</textarea>
+			<textarea id="contents" name="contents" placeholder="내용" required>${boardVO.contents}</textarea>
 		</div>
 		
 		<div>

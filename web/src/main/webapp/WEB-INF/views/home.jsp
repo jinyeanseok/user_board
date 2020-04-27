@@ -17,6 +17,7 @@
 	</script>
 </head>
 <body>
+<h1 align="center">게시판</h1>
 
 <a href="/board/register">글 작성</a><br />
 <a href="/board/listPage">글목록</a><br />
@@ -25,12 +26,12 @@
 <form role="form" method="post" autocomplete="off" action="/user/login">
 	 <div>
 	  <label for="identification">아이디</label>
-	  <input type="text" id="identification" name="identification" />
+	  <input type="text" id="identification" name="identification" required/>
 	 </div>
 	 
 	 <div>
 	  <label for="password">비밀번호</label>
-	  <input type="password" id="password" name="password" />
+	  <input type="password" id="password" name="password" required/>
 	 </div>
 	 <div><button type="submit">로그인</button></div>
 	 <div><a href="/user/register">회원가입</a></div>
@@ -76,6 +77,8 @@
 		alert("탈퇴 되었습니다.");
 	</script>
 </c:if>
+
+
 
 
 

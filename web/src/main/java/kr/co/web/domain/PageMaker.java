@@ -52,13 +52,16 @@ public class PageMaker {
 	
 	
 	public String makeQuery(int page) {
-		UriComponents uriComponents = UriComponentsBuilder.newInstance()
-				.queryParam("page", page)
-				.queryParam("perPageNum", this.cri.getPerPageNum())
-				.build()
-				.encode();
-				
-		return uriComponents.toString();
+		UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.newInstance()
+			.queryParam("page", page)
+			.queryParam("perPageNum", this.cri.getPerPageNum());
+		//검색 한 경우		
+		if (this.cri.getSearchType() != null) {
+			uriComponentsBuilder
+				.queryParam("searchType", this.cri.getSearchType())
+				.queryParam("keyword", this.cri.getKeyword());
+		}
+		return uriComponentsBuilder.build().encode().toString();
 	}
 
 	public int getDisplayPageCnt() {
@@ -135,13 +138,3 @@ public class PageMaker {
 
 	
 }
-
-
-
-
-
-
-
-
-
-

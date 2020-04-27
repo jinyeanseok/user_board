@@ -8,6 +8,7 @@ public class BoardVO {
 	private String contents;
 	private Date create_date;
 	private int view_count;
+	private String name;
 	
 	public Integer getBoard_number() {
 		return board_number;
@@ -53,5 +54,13 @@ public class BoardVO {
 	public String toString() {
 		return "BoardVO [board_number=" + board_number + ", title=" + title + ", contents=" + contents + ", create_date="
 				+ create_date + ", viewcount=" + view_count+ "]";
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

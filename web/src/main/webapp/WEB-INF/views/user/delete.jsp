@@ -27,16 +27,17 @@
 		
 		<div>
 			<label for="password">비밀번호</label>
-			<input type="password" id="password" name="password" />
+			<input type="password" id="password" name="password" required/>
 		</div>
 				
 		<div>
 			<button type="submit">회원탈퇴</button>
 		</div>
-		<div>
-			<a href="/">처음으로</a>
-		</div>
+		
 	</form>
+		<div>
+			<button><a href="/">처음으로</a></button>
+		</div>
 
 	
 	<c:if test="${msg == 'deleteFalse' }">
