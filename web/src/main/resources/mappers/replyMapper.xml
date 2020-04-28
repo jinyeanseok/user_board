@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="replyMapper">
+
+
+	<select id="readReply" resultType="kr.co.web.domain.ReplyVO">
+    	SELECT reply_number, board_number, replytext, replyer, create_date
+    	 FROM reply
+    	WHERE board_number = #{board_number}
+	</select>
+	
+	<insert id="createReply">
+		insert into reply(board_number, replytext, replyer)
+		values(#{board_number}, #{replytext}, #{replyer})
+	</insert>
+	
+	<update id="updateReply" parameterType="kr.co.web.domain.ReplyVO">
+		update reply
+		set replytext = #{replytext}
+		where reply_number = #{reply_number}
+	</update>
+	
+	<delete id="deleteReply" parameterType="kr.co.web.domain.ReplyVO">
+		delete 
+		from reply
+		where reply_number = #{reply_number}
+	</delete>
+	
+	<select id="replyCount" resultType="int">
+			select count(reply_number)
+			from reply
+			where board_number = #{board_number}
+	</select>
+	
+</mapper>
