@@ -37,4 +37,12 @@
 	</delete>
 	
 	
+	<!-- 
+		<select id="read" resultType = "kr.co.web.domain.UserVO">
+		select *
+		from user
+		where identification = #{identification}
+	</select>
+	 -->
+	
 </mapper>

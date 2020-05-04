@@ -42,9 +42,5 @@ public class ReplyDAOImple implements ReplyDAO{
 		session.delete(DELETE, vo);
 	}
 	
-	@Override
-	public void replyCount(int board_number) throws Exception {
-		session.selectOne(REPLYCOUNT, board_number);
-	}
 
 }

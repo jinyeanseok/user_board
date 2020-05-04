@@ -21,6 +21,7 @@ public class UserDAOImpl implements UserDAO{
 	private static String UPDATE = US + ".modify";
 	private static String DELETE = US + ".delete";
 	private static String IDCHEACK = US + ".idCheck";
+	private static String READ = US + ".read";
 	
 
 	@Override
@@ -47,6 +48,11 @@ public class UserDAOImpl implements UserDAO{
 	public UserVO idCheck(String identification) throws Exception {
 		return session.selectOne(IDCHEACK, identification);
 	}
+	
+//	@Override
+//	public UserVO read(UserVO user) throws Exception {
+//		return session.selectOne(READ, user);
+//	}
 
 
 }

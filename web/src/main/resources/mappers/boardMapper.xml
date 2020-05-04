@@ -7,8 +7,8 @@
 <mapper namespace="BoardMapper">
 
 	<insert id="create">
-		insert into board (title, contents, name)
-		values ( #{title}, #{contents}, #{name})
+		insert into board (title, contents, name, identification)
+		values ( #{title}, #{contents}, #{name}, #{identification})
 	</insert>
 	
 	<select id="read" resultType = "kr.co.web.domain.BoardVO">
@@ -85,5 +85,11 @@
 	insert into user(identification, password, name) 
 	values ( #{identification}, #{password}, #{name})
 	</insert>
+	
+	<select id="replyCount" resultType="int">
+		select count(reply_number)
+		from reply
+		where board_number = #{board_number}
+	</select>
 	
 </mapper>

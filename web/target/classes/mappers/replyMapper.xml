@@ -28,10 +28,6 @@
 		where reply_number = #{reply_number}
 	</delete>
 	
-	<select id="replyCount" resultType="int">
-			select count(reply_number)
-			from reply
-			where board_number = #{board_number}
-	</select>
+	
 	
 </mapper>

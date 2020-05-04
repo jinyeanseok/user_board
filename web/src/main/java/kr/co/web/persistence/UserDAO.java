@@ -13,4 +13,6 @@ public interface UserDAO {
 	public void delete(UserVO user) throws Exception;
 	
 	public UserVO idCheck(String identification) throws Exception;
+	
+//	public UserVO read(UserVO user) throws Exception;
 }

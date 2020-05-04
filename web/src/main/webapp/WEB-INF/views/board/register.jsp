@@ -40,6 +40,12 @@
 			<label for="name">작성자</label>
 			<input type="text" id="name" name="name" value="${user.name}" readonly="readonly" required>
 		</div>		
+		
+		<div>
+			<label for="identification">아이디</label>
+			<input type="text" id="identification" name="identification" value="${user.identification}" readonly="readonly" required>
+		</div>	
+		
 		<div>
 			<button type="submit">등록</button>
 		</div>

@@ -72,10 +72,19 @@
 	
 	
 	<div>
+		<c:if test="${user.identification == boardVO.identification }">
+		<form action="/board/remove?board_number=${boardVO.board_number}" method="post">
+			<a><button>게시글 삭제</button></a>
+		</form>
+		</c:if>
+	</div>
+	<!-- 
+	<div>
 		<form action="/board/remove?board_number=${boardVO.board_number}" method="post">
 			<a><button>게시글 삭제</button></a>
 		</form>
 	</div>
+	 -->
 	
 	
 		<div>
@@ -90,8 +99,10 @@
 				
 		
 		<div>
+			<c:if test="${user.identification == boardVO.identification }">
 			<a href="/board/update?board_number=${boardVO.board_number}" ><button>수정</button></a>
 			<a href="/board/listPage"><button>취소</button></a>
+			</c:if>
 		</div>
 		<br />
 		<br />
@@ -147,10 +158,6 @@
 			</script>
 	</c:if>
 	
-	<c:if test="${msg == true}">
-			<script>
-				alert("test.");
-			</script>
-	</c:if>
+	
 </body>
 </html>

@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,8 +20,10 @@ import kr.co.web.domain.BoardVO;
 import kr.co.web.domain.Criteria;
 import kr.co.web.domain.PageMaker;
 import kr.co.web.domain.ReplyVO;
+import kr.co.web.domain.UserVO;
 import kr.co.web.service.BoardService;
 import kr.co.web.service.ReplyService;
+import kr.co.web.service.UserService;
 
 @Controller
 @RequestMapping("/board/*")
@@ -33,6 +36,9 @@ public class BoardController {
 
 	@Inject
 	ReplyService replyService;
+	
+	@Inject
+	private UserService userService;
 	
 //	@RequestMapping(value = "/register", method = RequestMethod.GET)
 //	public void registerGET(BoardVO board, Model model) throws Exception {
@@ -100,7 +106,7 @@ public class BoardController {
 //	}
 	
 	@RequestMapping(value = "/readView", method = RequestMethod.GET)
-	public String readReply(HttpSession session, @RequestParam("board_number") Integer board_number, @ModelAttribute("cri") Criteria cri , Model model) throws Exception{
+	public String readReply(UserVO user, HttpSession session, @RequestParam("board_number") Integer board_number, @ModelAttribute("cri") Criteria cri , Model model) throws Exception{
 		logger.info("read GET");
 		BoardVO board = boardService.read(board_number);
 		logger.info("boardddd  " + board);
@@ -114,6 +120,15 @@ public class BoardController {
 		model.addAttribute("replyList", replyList);
 		
 		Object loginInfo = session.getAttribute("user");
+		
+//		UserVO login = (UserVO)userService.login(user);
+		
+		logger.info("loginInfo = " + loginInfo);
+		
+		// 로그인정보
+		UserVO vo = (UserVO) session.getAttribute("user");
+		logger.info("asddasd" + vo.getIdentification());
+		model.addAttribute("user", vo);
 		
 		if(loginInfo == null) {
 			model.addAttribute("msg", false);
@@ -150,7 +165,7 @@ public class BoardController {
 	
 
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
-	public void listPage(Criteria cri, Model model, HttpSession session) throws Exception{
+	public void listPage(Criteria cri, Model model, HttpSession session) throws Exception{ // replyVO 추가
 		logger.info("listPage");
         //현재 페이지에 해당하는 게시물을 조회해 옴 
 		List<BoardVO> boards = boardService.listPage(cri);
@@ -172,6 +187,11 @@ public class BoardController {
 			model.addAttribute("msg", false);
 		}
 		
+		
+	
+//		int replyCount = boardService.replyCount(board_number);
+		
+//		logger.info("replycount 111" + replyCount);
 	}
 	
 	@RequestMapping(value="/replyRegister", method = RequestMethod.POST)
@@ -185,6 +205,7 @@ public class BoardController {
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addAttribute("searchType", cri.getSearchType());
 		rttr.addAttribute("keyword", cri.getKeyword());
+		
 		
 		return "redirect:/board/readView";
 	}

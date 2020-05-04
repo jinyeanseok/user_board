@@ -9,7 +9,7 @@ public class ReplyVO {
 	private String replyer;
 	private Date create_date;
 	private Date update_date;
-	private Integer reply_count;
+
 	
 	public Integer getReply_number() {
 		return reply_number;
@@ -47,11 +47,6 @@ public class ReplyVO {
 	public void setUpdate_date(Date update_date) {
 		this.update_date = update_date;
 	}
-	public Integer getReply_count() {
-		return reply_count;
-	}
-	public void setReply_count(Integer reply_count) {
-		this.reply_count = reply_count;
-	}
+
 
 }

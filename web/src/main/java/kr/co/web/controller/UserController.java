@@ -52,21 +52,26 @@ public class UserController {
 	 
 	 UserVO login = userService.login(user);
 	 
+	 
 	 if(login == null) {
 	  session.setAttribute("user", null);
 	  rttr.addFlashAttribute("msg", "loginFalse");
 	  String oldPass = user.getPassword();
 	  logger.info("로그인할 때 입력한 비밀번호" + oldPass);
 	  
-	 } else {
+	 }
+	 else 
+	 {
 	  session.setAttribute("user", login);
 	  rttr.addFlashAttribute("msg", "loginTrue");
 	  String oldPass = login.getPassword();
 	  logger.info("로그인할 때 입력한 비밀번호" + oldPass);
 	  logger.info(login + "로그 입력");
 	 }
-	   
+	 
+	 
 	 return "redirect:/";
+//	 return "redirect:/board/listPage";
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

@@ -9,6 +9,8 @@ public class BoardVO {
 	private Date create_date;
 	private int view_count;
 	private String name;
+	private int reply_count;
+	private String identification;
 	
 	public Integer getBoard_number() {
 		return board_number;
@@ -62,5 +64,21 @@ public class BoardVO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getReply_count() {
+		return reply_count;
+	}
+
+	public void setReply_count(int reply_count) {
+		this.reply_count = reply_count;
+	}
+
+	public String getIdentification() {
+		return identification;
+	}
+
+	public void setIdentification(String identification) {
+		this.identification = identification;
 	}
 }

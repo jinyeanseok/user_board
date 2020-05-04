@@ -25,4 +25,6 @@ public interface BoardService {
 	public int getTotalCount(Criteria cri) throws Exception;
 	
 	public void viewCount(int board_number) throws Exception;
+	
+//	public int replyCount(Criteria cri) throws Exception;
 }
