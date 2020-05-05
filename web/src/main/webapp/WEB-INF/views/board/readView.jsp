@@ -21,10 +21,10 @@
   		alert("수정 되었습니다.");
   	}
   	
-
 	$(function(){
 		createReply();
 		updateReply();
+		deleteReply();
 	})
 	
 	function createReply(){
@@ -49,15 +49,33 @@
 	
 			
 //댓글 삭제 View
-	$(".replyDeleteBtn").on("click", function(){
-		location.href = "/board/replyDeleteView?board_number=${boardVO.board_number}"
-			+ "&page=${cri.page}"
-			+ "&perPageNum=${cri.perPageNum}"
-			+ "&searchType=${cri.searchType}"
-			+ "&keyword=${cri.keyword}"
-			+ "&reply_number="+$(this).attr("data-rno");
-	});
-  	
+	function deleteReply(){
+		$(".replyDeleteBtn").on("click", function(){
+			location.href = "/board/replyDeleteView?board_number=${boardVO.board_number}"
+							+ "&page=${cri.page}"
+							+ "&perPageNum=${cri.perPageNum}"
+							+ "&searchType=${cri.searchType}"
+							+ "&keyword=${cri.keyword}"
+							+ "&reply_number="+$(this).attr("data-rno");
+		});
+	}
+	
+	
+	/*
+	function deleteReply(){
+		$(".replyDeleteBtn").on("click", function(){
+			location.href = "/board/replyDeleteView?board_number=${boardVO.board_number}"
+				+ "&page=${cri.page}"
+				+ "&perPageNum=${cri.perPageNum}"
+				+ "&searchType=${cri.searchType}"
+				+ "&keyword=${cri.keyword}"
+				+ "&reply_number="+$(this).attr("data-rno");
+		});
+	}
+	
+	*/
+	
+	
   	
   </script>
 	
@@ -111,16 +129,12 @@
 			
 		    <c:forEach items="${replyList}" var="replyList">
 		      
-		     <div>
 		        <div>
 		  	        	 작성자 : ${replyList.replyer}<br />
 		  	      	   작성 날짜 :  <fmt:formatDate value="${replyList.create_date}" pattern="yyyy-MM-dd" />
 		        </div>
 		     
-		        <div>${replyList.replytext}</div>	
-		       </div>  
-		       <br />
-		      
+		        <div>${replyList.replytext}</div>      
 		       <div>
 				  <button type="button" class="replyUpdateBtn" data-rno="${replyList.reply_number}">수정</button>
 				  <button type="button" class="replyDeleteBtn" data-rno="${replyList.reply_number}">삭제</button>

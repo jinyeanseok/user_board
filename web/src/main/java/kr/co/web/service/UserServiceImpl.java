@@ -37,4 +37,10 @@ public class UserServiceImpl implements UserService{
 	public UserVO idCheck(String identification) throws Exception {
 		return userDAO.idCheck(identification);
 	}
+	
+	@Override
+	public int idChk(UserVO user) throws Exception {
+		return userDAO.idChk(user);
+	}
+	
 }

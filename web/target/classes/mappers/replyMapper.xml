@@ -28,6 +28,16 @@
 		where reply_number = #{reply_number}
 	</delete>
 	
+	<select id="selectReply" resultType="kr.co.web.domain.ReplyVO">
+		SELECT
+				board_number
+			  , reply_number
+			  , replytext
+			  , replyer
+			  , create_date
+		  FROM reply
+		 WHERE reply_number = #{reply_number}
+	</select>
 	
 	
 </mapper>

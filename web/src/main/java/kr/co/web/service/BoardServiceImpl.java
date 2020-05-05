@@ -61,5 +61,8 @@ public class BoardServiceImpl implements BoardService{
 //		return boardDAO.replyCount(cri);
 //		
 //	}
-
+	@Override
+	public void replyCount(int board_number) throws Exception {
+		boardDAO.replyCount(board_number);
+	}
 }

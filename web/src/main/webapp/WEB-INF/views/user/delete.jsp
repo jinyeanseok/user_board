@@ -40,9 +40,9 @@
 		</div>
 
 	
-	<c:if test="${msg == 'deleteFalse' }">
+	<c:if test="${msg == false }">
 	<script>
-		alert("회원탈퇴에 실패했습니다.");
+		alert("회원탈퇴를 실패했습니다.");
 	</script>
 </c:if>
 

@@ -14,6 +14,25 @@
   <style type="text/css">
 			li {list-style: none; float: left; padding: 6px;}
 	</style>
+	
+	<script>
+		function fn_idChk() {
+			$.ajax({
+				url : "/user/idChk",
+				type : "post",
+				dataType : "json",
+				data : {"identification" : $('#identification').val()},
+				success : function(data){
+					if(data == 1) {
+						alert("중복된 아이디입니다.");
+					}else if(data == 0) {
+						$('#idChk').attr("value", "Y");
+						alert("사용가능한 아이디입니다.");
+					}
+				}
+			})
+		}
+	</script>
 </head>
 <body>
 	<h1>회원가입</h1>
@@ -23,6 +42,7 @@
 		<div>
 			<label for="identification">아이디</label>
 			<input type="text" id="identification" name="identification" placeholder="아이디"  required/>
+			<button class="idChk" type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button>
 		</div>
 		
 		<div>
@@ -35,6 +55,8 @@
 			<input type="password" id="password" name="password" placeholder="비밀번호" required/>
 		</div>
 				
+		
+		
 		<div>
 			<button type="submit" id="submit">가입</button>
 		</div>

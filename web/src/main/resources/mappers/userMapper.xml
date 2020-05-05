@@ -16,6 +16,12 @@
 		from user
 		where identification = #{identification} and password = #{password}
 	</select>
+	
+	<select id="loginBcrypt" resultType="kr.co.web.domain.UserVO">
+		select identification, password, name
+		from user
+		where identification = #{identification}
+	</select>
 	<!-- 
 		<select id="login" resultType="kr.co.web.domain.UserVO">
 		select identification, name
@@ -37,12 +43,12 @@
 	</delete>
 	
 	
-	<!-- 
-		<select id="read" resultType = "kr.co.web.domain.UserVO">
-		select *
+	<select id="idChk" resultType="int">
+		select count(*)
 		from user
 		where identification = #{identification}
 	</select>
-	 -->
+	
+	
 	
 </mapper>

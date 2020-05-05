@@ -14,4 +14,7 @@ public interface ReplyService {
 	
 	public void deleteReply(ReplyVO vo) throws Exception;
 	
+	public ReplyVO selectReply(int reply_number) throws Exception;
+	
+	public void replyCount(int board_number) throws Exception;
 }

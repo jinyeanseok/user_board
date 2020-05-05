@@ -15,4 +15,6 @@ public interface UserDAO {
 	public UserVO idCheck(String identification) throws Exception;
 	
 //	public UserVO read(UserVO user) throws Exception;
+	
+	public int idChk(UserVO user) throws Exception;
 }

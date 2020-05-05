@@ -44,6 +44,12 @@
 	</script>
 </c:if>
 
+<c:if test="${msg == 'registerNO' }">
+	<script>
+		alert("회원가입에 실패하였습니다.")
+	</script>
+</c:if>
+
 <c:if test="${msg == 'loginFalse' }">
 	<script>
 		alert("로그인을 실패했습니다.");

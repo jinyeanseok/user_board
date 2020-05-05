@@ -35,4 +35,13 @@ public class ReplyServiceImpl implements ReplyService {
 		dao.deleteReply(vo);
 	}
 	
+	@Override
+	public ReplyVO selectReply(int reply_number) throws Exception {
+		return dao.selectReply(reply_number);
+	}
+	
+	@Override
+	public void replyCount(int board_number) throws Exception {
+		dao.replyCount(board_number);
+	}
 }

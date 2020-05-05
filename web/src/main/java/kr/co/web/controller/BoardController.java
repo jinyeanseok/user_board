@@ -113,6 +113,11 @@ public class BoardController {
 		boardService.viewCount(board_number);
 		model.addAttribute(board);
 		
+		
+		boardService.replyCount(board_number);
+		// 댓글 수 업데이트
+		
+		
 //		List<ReplyVO> replyList = replyService.readReply(board.getBoard_number());
 		logger.info("boardnumber = " + board_number);
 		List<ReplyVO> replyList = replyService.readReply(board_number);
@@ -168,6 +173,10 @@ public class BoardController {
 	public void listPage(Criteria cri, Model model, HttpSession session) throws Exception{ // replyVO 추가
 		logger.info("listPage");
         //현재 페이지에 해당하는 게시물을 조회해 옴 
+
+//		replyService.replyCount(board_number);
+//		boardService.replyCount(board_number);
+	
 		List<BoardVO> boards = boardService.listPage(cri);
         //모델에 추가
 		model.addAttribute("list",boards);
@@ -214,56 +223,63 @@ public class BoardController {
 	public String replyUpdateView(ReplyVO vo, Criteria cri, Model model) throws Exception {
 		logger.info("reply Write");
 		
+		model.addAttribute("replyUpdate", replyService.selectReply(vo.getReply_number()));
 		
-		model.addAttribute("replyUpdate", replyService.readReply(vo.getBoard_number()));
-	
+		
+//		ReplyVO test = replyService.selectReply(vo.getReply_number());
+//		logger.info("test = " + test);
+		
 		model.addAttribute("cri", cri);
 		
-		return "/board/replyUpdateView";
+		return "board/replyUpdateView";
 	}
 	
 	
-	@RequestMapping(value="/replyUpdate", method = RequestMethod.POST)
-	public String replyUpdate(ReplyVO vo, Criteria cri, RedirectAttributes rttr) throws Exception {
-		logger.info("reply Write");
-		
-		replyService.updateReply(vo);
-		
-		rttr.addAttribute("board_number", vo.getBoard_number());
-		rttr.addAttribute("page", cri.getPage());
-		rttr.addAttribute("perPageNum", cri.getPerPageNum());
-		rttr.addAttribute("searchType", cri.getSearchType());
-		rttr.addAttribute("keyword", cri.getKeyword());
-		
-		return "redirect:/board/readView";
-	}
-	
-	@RequestMapping(value="/replyDeleteView", method = RequestMethod.GET)
-	public String replyDeleteView(ReplyVO vo, Criteria cri, Model model) throws Exception {
-		logger.info("reply Write");
-		
-		model.addAttribute("replyDelete", replyService.readReply(vo.getBoard_number()));
-		model.addAttribute("cri", cri);
-		
+	//댓글 수정 POST
+		@RequestMapping(value="/replyUpdate", method = RequestMethod.POST)
+		public String replyUpdate(ReplyVO vo, Criteria cri, RedirectAttributes rttr) throws Exception {
+			logger.info("reply Write");
+			
+			replyService.updateReply(vo);
+			
+			rttr.addAttribute("board_number", vo.getBoard_number());
+			rttr.addAttribute("page", cri.getPage());
+			rttr.addAttribute("perPageNum", cri.getPerPageNum());
+			rttr.addAttribute("searchType", cri.getSearchType());
+			rttr.addAttribute("keyword", cri.getKeyword());
+			
+			return "redirect:/board/readView";
+		}
 
-		return "board/replyDeleteView";
-	}
 	
-	//댓글 삭제
-	@RequestMapping(value="/replyDelete", method = RequestMethod.POST)
-	public String replyDelete(ReplyVO vo, Criteria cri, RedirectAttributes rttr) throws Exception {
-		logger.info("reply Write");
+		//댓글 삭제 GET
+		@RequestMapping(value="/replyDeleteView", method = RequestMethod.GET)
+		public String replyDeleteView(ReplyVO vo, Criteria cri, Model model) throws Exception {
+			logger.info("reply delete");
+			
+			model.addAttribute("replyDelete", replyService.selectReply(vo.getReply_number()));
+			model.addAttribute("cri", cri);
+			
+//			replyService.selectReply(vo.getBoard_number())
+
+			return "/board/replyDeleteView";
+		}
 		
-		replyService.deleteReply(vo);
-		
-		rttr.addAttribute("bno", vo.getBoard_number());
-		rttr.addAttribute("page", cri.getPage());
-		rttr.addAttribute("perPageNum", cri.getPerPageNum());
-		rttr.addAttribute("searchType", cri.getSearchType());
-		rttr.addAttribute("keyword", cri.getKeyword());
-		
-		return "redirect:/board/readView";
-	}
+		//댓글 삭제
+		@RequestMapping(value="/replyDelete", method = RequestMethod.POST)
+		public String replyDelete(ReplyVO vo, Criteria cri, RedirectAttributes rttr) throws Exception {
+			logger.info("reply delete");
+			
+			replyService.deleteReply(vo);
+			
+			rttr.addAttribute("board_number", vo.getBoard_number());
+			rttr.addAttribute("page", cri.getPage());
+			rttr.addAttribute("perPageNum", cri.getPerPageNum());
+			rttr.addAttribute("searchType", cri.getSearchType());
+			rttr.addAttribute("keyword", cri.getKeyword());
+			
+			return "redirect:/board/readView";
+		}
 	
 	
 	

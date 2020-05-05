@@ -76,4 +76,9 @@ public class BoardDAOImpl implements BoardDAO {
 //	public int replyCount(Criteria cri) throws Exception {
 //		return session.selectOne(REPLYCOUNT, cri);
 //	}
+	
+	@Override
+	public void replyCount(int board_number) throws Exception {
+		 session.selectOne(REPLYCOUNT, board_number);
+	}
 }

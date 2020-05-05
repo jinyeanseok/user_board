@@ -86,10 +86,11 @@
 	values ( #{identification}, #{password}, #{name})
 	</insert>
 	
-	<select id="replyCount" resultType="int">
-		select count(reply_number)
-		from reply
-		where board_number = #{board_number}
+	<!-- 댓글 등록이나 삭제 후 테이블의 댓글 수 업데이트 -->
+	<select id="replyCount" parameterType="int">
+		update board b
+		set b.reply_count = (select count(reply_number) from reply where board_number = #{board_number})
+		where b.board_number = #{board_number}
 	</select>
 	
 </mapper>

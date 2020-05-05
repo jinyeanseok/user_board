@@ -21,6 +21,8 @@ public class ReplyDAOImple implements ReplyDAO{
 	private static String UPDATE = RS + ".updateReply";
 	private static String DELETE = RS + ".deleteReply";
 	private static String REPLYCOUNT = RS + ".replyCount";
+	private static String SELECTREPLY = RS + ".selectReply";
+
 	
 	@Override
 	public List<ReplyVO> readReply(int board_number) throws Exception {
@@ -42,5 +44,13 @@ public class ReplyDAOImple implements ReplyDAO{
 		session.delete(DELETE, vo);
 	}
 	
+	@Override
+	public ReplyVO selectReply(int reply_number) throws Exception {
+		return session.selectOne(SELECTREPLY, reply_number);
+	}
+	
+	public void replyCount(int board_number) throws Exception {
+		session.update(REPLYCOUNT, board_number);
+	}
 
 }
