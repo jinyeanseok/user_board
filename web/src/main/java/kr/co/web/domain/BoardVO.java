@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class BoardVO {
 	private Integer board_number;
+//	private int board_number;
 	private String title;
 	private String contents;
 	private Date create_date;

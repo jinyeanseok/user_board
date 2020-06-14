@@ -16,13 +16,14 @@
 	</style>
 </head>
 <body>
-	<h1>회원삭제</h1>
+	
+	<h1 align="center"><a href="/">회원삭제</a></h1>
 	<hr/>
 
 	<form method="post">
 		<div>
 			<label for="identification">아이디</label>
-			<input type="text" id="identification" name="identification" value="${user.identification}" } />
+			<input type="text" id="identification" name="identification" value="${user.identification}" readonly="readonly"} />
 		</div>
 		
 		<div>

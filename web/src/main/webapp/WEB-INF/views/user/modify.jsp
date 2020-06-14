@@ -14,7 +14,7 @@
 	</style>
 </head>
 <body>
-	<h1>회원정보수정</h1>
+	<h1 align="center"><a href="/">회원수정</a></h1>
 	<hr/>
 
 	<form method="post">

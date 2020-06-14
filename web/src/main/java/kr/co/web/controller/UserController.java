@@ -72,6 +72,11 @@ public class UserController {
 	 HttpSession session = req.getSession();
 	 UserVO login = userService.login(user);
 	 
+	 if(login == null) {
+		 rttr.addFlashAttribute("msg", "loginFalse");
+		 return "redirect:/";
+	 }
+	 
 	 boolean passMatch = pwdEncoder.matches(user.getPassword(), login.getPassword());
 	 
 	 if(login != null && passMatch) {
@@ -131,6 +136,9 @@ public class UserController {
 	 
 	 userService.modify(user);
 	 session.invalidate();
+	 
+	 rttr.addFlashAttribute("msg", "updateOK");
+
 	 
 	 return "redirect:/";
 //	 userService.modify(user);

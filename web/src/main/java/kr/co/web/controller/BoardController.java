@@ -1,8 +1,12 @@
 package kr.co.web.controller;
 
+import java.io.File;
+import java.net.URLEncoder;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.web.domain.BoardVO;
@@ -37,8 +42,7 @@ public class BoardController {
 	@Inject
 	ReplyService replyService;
 	
-	@Inject
-	private UserService userService;
+
 	
 //	@RequestMapping(value = "/register", method = RequestMethod.GET)
 //	public void registerGET(BoardVO board, Model model) throws Exception {
@@ -57,14 +61,18 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String registerPOST(BoardVO board, RedirectAttributes rttr) throws Exception{
+	public String registerPOST(BoardVO board, RedirectAttributes rttr, MultipartHttpServletRequest mpRequest) throws Exception{
+//	public String registerPOST(BoardVO board, RedirectAttributes rttr) throws Exception{
 		logger.info("register post.....");
-		logger.info(board.toString());
+//		logger.info(board.toString());
 		//실질적인 insert문 실행
-		boardService.register(board);
+//		boardService.register(board);
+		logger.info(board.toString());
+		boardService.register(board, mpRequest);
 		//model에 registerOK라는 값을 가지고 있는 result 속성을 추가
 		rttr.addFlashAttribute("result", "registerOK");
-
+		
+		logger.info("board_number registerPOST " + board.getBoard_number());
 		
         //WEB-INF/views/board/sucess.jsp 호출
 //		return "/board/success";
@@ -133,6 +141,12 @@ public class BoardController {
 		// 로그인정보
 		UserVO vo = (UserVO) session.getAttribute("user");
 		logger.info("asddasd" + vo.getIdentification());
+		
+		String id = vo.getIdentification();
+		logger.info("id = " + id);
+		
+		model.addAttribute("id", id);
+		
 		model.addAttribute("user", vo);
 		
 		if(loginInfo == null) {
@@ -140,6 +154,12 @@ public class BoardController {
 		}else if(loginInfo != null) {
 			model.addAttribute("msg", true);
 		}
+		
+		List<Map<String, Object>> fileList = boardService.selectFileList(board.getBoard_number());
+		// selectFileList에 게시글을 조회한 번호를 넣어주고 Map타입의 List타입 fileList에 넣어줌
+		
+		model.addAttribute("file", fileList);
+		// model.addAttribute를 이용하여 fileList를 file이라는 이름으로 jsp에 값을 보낼준비를 함.
 		
 		return "/board/readView";
 
@@ -214,6 +234,8 @@ public class BoardController {
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addAttribute("searchType", cri.getSearchType());
 		rttr.addAttribute("keyword", cri.getKeyword());
+		rttr.addAttribute(vo.getReplyer());
+		System.out.println("댓글작성한 사람 아이디" + vo.getReplyer());
 		
 		
 		return "redirect:/board/readView";
@@ -281,6 +303,21 @@ public class BoardController {
 			return "redirect:/board/readView";
 		}
 	
+		@RequestMapping(value="/fileDown")
+		public void fileDown(@RequestParam Map<String, Object> map, HttpServletResponse response) throws Exception {
+			Map<String, Object> resultMap = boardService.selectFileInfo(map);
+			String storedFileName = (String) resultMap.get("stored_file_name");
+			String originalFileName = (String) resultMap.get("org_file_name");
+			
+			byte fileByte[] = org.apache.commons.io.FileUtils.readFileToByteArray(new File("C:\\mp\\file\\"+storedFileName));
+			
+			response.setContentType("application/octet-stream");
+			response.setContentLength(fileByte.length);
+			response.setHeader("Content-Disposition",  "attachment; fileName=\""+URLEncoder.encode(originalFileName, "UTF-8")+"\";");
+			response.getOutputStream().write(fileByte);
+			response.getOutputStream().flush(); // 데이터를 비워주는 역할
+			response.getOutputStream().close(); // 닫아주는 역할
+		}
 	
 	
 	

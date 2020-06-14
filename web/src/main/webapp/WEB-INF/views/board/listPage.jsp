@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판</title>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -62,8 +63,7 @@
 </head>
 
 <body>
-	<h1 align="center">게시판</h1>
-	
+	<h1 align="center"><a href="/">게시판</a></h1>
 	<hr/>
 	
 	
@@ -90,6 +90,13 @@
 		<a href="/board/register"><button>글 등록</button></a>
 		<hr/>
 	</div>
+	</c:if>
+	
+	<c:if test="${user != null }">
+		<div>
+			${user.name}(${user.identification})님 반갑습니다.
+		</div>
+		<br />
 	</c:if>
 	
 	<c:if test="${msg == null}">

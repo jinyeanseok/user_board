@@ -21,7 +21,7 @@
 				url : "/user/idChk",
 				type : "post",
 				dataType : "json",
-				data : {"identification" : $('#identification').val()},
+				data : {"identification" : $('#identification').val()}, // val 내부에 입력된 값을 가져오라
 				success : function(data){
 					if(data == 1) {
 						alert("중복된 아이디입니다.");
@@ -35,9 +35,10 @@
 	</script>
 </head>
 <body>
-	<h1>회원가입</h1>
-	<hr/>
 
+	<h1 align="center"><a href="/">회원가입</a></h1>
+	<hr/>
+	
 	<form method="post">
 		<div>
 			<label for="identification">아이디</label>

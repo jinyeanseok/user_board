@@ -16,7 +16,7 @@
 	</style>
 </head>
 <body>
-	<h1>게시판</h1>
+	<h1 align="center"><a href="/">게시판</a></h1>
 	<hr/>
 	<c:if test="${msg == null}">
 	<a href="/board/listPage"><button>목록</button></a>
@@ -25,7 +25,7 @@
 	
 
 	<c:if test="${msg == null}">
-		<form method="post">
+		<form method="post" enctype="multipart/form-data">
 		<div>
 			<label for="title">제목</label>
 			<input type="text" id="title" name="title" placeholder="제목" required/>
@@ -45,6 +45,10 @@
 			<label for="identification">아이디</label>
 			<input type="text" id="identification" name="identification" value="${user.identification}" readonly="readonly" required>
 		</div>	
+		
+		<div>
+			<input type="file" name="file">
+		</div>
 		
 		<div>
 			<button type="submit">등록</button>

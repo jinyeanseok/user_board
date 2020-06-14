@@ -1,11 +1,13 @@
 package kr.co.web.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.co.web.domain.BoardVO;
 import kr.co.web.domain.Criteria;
@@ -26,11 +28,18 @@ public class BoardDAOImpl implements BoardDAO {
 	private static String GETTOTALCOUNT = NS + ".gettotalcount";
 	private static String VIEWCOUNT = NS + ".viewCount";
 	private static String REPLYCOUNT = NS + ".replyCount";
-	
+	private static String INSERTFILE = NS + ".insertFile";
+	private static String SELECTFILELIST = NS + ".selectFileList";
+	private static String SELECTFILEINFO = NS + ".selectFileInfo";
+
 	@Override
-	public void create(BoardVO board) throws Exception {
+	public void create(BoardVO board, MultipartHttpServletRequest mpRequest) throws Exception {
 		session.insert(CREATE, board);
 	}
+//	@Override
+//	public void create(BoardVO board) throws Exception {
+//		session.insert(CREATE, board);
+//	}
 	
 	@Override
 	public BoardVO read(Integer board_number) throws Exception {
@@ -80,5 +89,20 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public void replyCount(int board_number) throws Exception {
 		 session.selectOne(REPLYCOUNT, board_number);
+	}
+	
+	@Override
+	public void insertFile(Map<String, Object> map) throws Exception {
+		session.insert(INSERTFILE, map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> selectFileList(int board_number) throws Exception {	
+		return session.selectList(SELECTFILELIST, board_number);
+	}
+	
+	@Override
+	public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception {
+		return session.selectOne(SELECTFILEINFO, map);
 	}
 }

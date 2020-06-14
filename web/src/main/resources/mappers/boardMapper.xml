@@ -5,8 +5,10 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="BoardMapper">
-
-	<insert id="create">
+	<!-- mybatis의 경우 인서트의 결과가 영향받은 행이 리턴되기때문에 selectKey가 없으면 생성과 동시에 번호를 가져오지 못함 -->
+	<!-- resultType을 long으로 했었는데 vo에서 설정한 그대로 Integer로 설정하니 제대로 번호가 나옴 -->
+	<insert id="create" parameterType="kr.co.web.domain.BoardVO" useGeneratedKeys="true">
+	<selectKey resultType="Integer" keyProperty="board_number" order="AFTER"> SELECT MAX(board_number) FROM board </selectKey>
 		insert into board (title, contents, name, identification)
 		values ( #{title}, #{contents}, #{name}, #{identification})
 	</insert>
@@ -82,8 +84,8 @@
 	</update>
 	
 	<insert id="userCreate">
-	insert into user(identification, password, name) 
-	values ( #{identification}, #{password}, #{name})
+		insert into user(identification, password, name) 
+		values ( #{identification}, #{password}, #{name})
 	</insert>
 	
 	<!-- 댓글 등록이나 삭제 후 테이블의 댓글 수 업데이트 -->
@@ -91,6 +93,23 @@
 		update board b
 		set b.reply_count = (select count(reply_number) from reply where board_number = #{board_number})
 		where b.board_number = #{board_number}
+	</select>
+	
+	<insert id="insertFile" parameterType="hashMap">
+		insert into file(board_number, org_file_name, stored_file_name, file_size)
+		values ( #{board_number}, #{org_file_name}, #{stored_file_name}, #{file_size})
+	</insert>
+	
+	<select id="selectFileList" parameterType="int" resultType="hashMap">
+		select file_number, org_file_name, round(file_size/1024,1) as file_size
+		from file
+		where board_number = #{board_number} and file_delete = 'n'
+	</select>
+	
+	<select id="selectFileInfo" parameterType="hashMap" resultType="hashMap">
+		select org_file_name, stored_file_name
+		from file
+		where file_number = #{file_number}
 	</select>
 	
 </mapper>

@@ -25,7 +25,7 @@
 	
 </head>
 <body>
-	<h1>게시판</h1>
+	<h1 align="center"><a href="/">게시판</a></h1>
 	<hr/>
 	 <a href="/board/listPage${cri.makeQuery()}"><button>목록</button></a> 
 	

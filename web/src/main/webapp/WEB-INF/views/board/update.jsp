@@ -19,7 +19,7 @@
 	
 </head>
 <body>
-	<h1>게시글 수정하기</h1>
+	<h1 align="center"><a href="/">게시판</a></h1>
 	<hr/>
 	
 	<div>

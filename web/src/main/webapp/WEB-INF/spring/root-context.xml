@@ -38,5 +38,11 @@
 	<!-- kr.co.web.service 패키지를 자동으로 인식 -->
 	<context:component-scan base-package="kr.co.web.service">
 	</context:component-scan>
+	<!-- kr.co.web.util 패키지를 자동으로 인식 -->
+	<context:component-scan base-package="kr.co.web.util">
+	</context:component-scan>
+	<!-- kr.co.web.domain 패키지를 자동으로 인식 -->
+	<context:component-scan base-package="kr.co.web.domain">
+	</context:component-scan>
 
 </beans>
