@@ -103,7 +103,7 @@
 	<select id="selectFileList" parameterType="int" resultType="hashMap">
 		select file_number, org_file_name, round(file_size/1024,1) as file_size
 		from file
-		where board_number = #{board_number} and file_delete = 'n'
+		where board_number = #{board_number} and file_delete = 'n' order by file_number asc
 	</select>
 	
 	<select id="selectFileInfo" parameterType="hashMap" resultType="hashMap">
@@ -111,5 +111,11 @@
 		from file
 		where file_number = #{file_number}
 	</select>
+	
+	<update id="updateFile" parameterType="hashMap">
+		update file 
+		set file_delete = 'y'
+		where file_number = #{file_number}
+	</update>
 	
 </mapper>

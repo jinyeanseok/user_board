@@ -94,4 +94,21 @@ public class BoardServiceImpl implements BoardService{
 	public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception {
 		return boardDAO.selectFileInfo(map);
 	}
+	
+//	@Override
+//	public void update(BoardVO board, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception {
+//		boardDAO.update(board);
+//		
+//		List<Map<String, Object>> list = fileUtils.parseUpdateFileInfo(board, files, fileNames, mpRequest);
+//		Map<String, Object> tempMap = null;
+//		int size = list.size();
+//		for(int i = 0; i<size; i++) {
+//			tempMap = list.get(i);
+//			if(tempMap.get("IS_NEW").equals("Y")) {
+//				boardDAO.insertFile(tempMap);
+//			}else {
+//				boardDAO.updateFile(tempMap);
+//			}
+//		}
+//	}
 }

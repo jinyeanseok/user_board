@@ -185,7 +185,7 @@ public class BoardController {
 		logger.info("updatePOST");
 		boardService.modify(board);
 		rttr.addFlashAttribute("result", "saveOK");
-		return "redirect:/board/read?board_number=" + board.getBoard_number();
+		return "redirect:/board/readView?board_number=" + board.getBoard_number();
 	}
 	
 

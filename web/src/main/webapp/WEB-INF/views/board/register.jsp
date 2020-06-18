@@ -11,52 +11,68 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   
-  <style type="text/css">
-			li {list-style: none; float: left; padding: 6px;}
-	</style>
+	  <style type="text/css">
+				li {list-style: none; float: left; padding: 6px;}
+				
+				 a:link { color: black; text-decoration: none;}
+				 a:visited { color: black; text-decoration: none;}
+				 a:hover { color: blue; text-decoration: underline;}
+	  </style>
 </head>
 <body>
 	<h1 align="center"><a href="/">게시판</a></h1>
-	<hr/>
-	<c:if test="${msg == null}">
+	
+	<!-- <c:if test="${msg == null}">
 	<a href="/board/listPage"><button>목록</button></a>
-	</c:if>
-	<hr/>
+	</c:if> -->
+
 	
 
-	<c:if test="${msg == null}">
-		<form method="post" enctype="multipart/form-data">
-		<div>
-			<label for="title">제목</label>
-			<input type="text" id="title" name="title" placeholder="제목" required/>
-		</div>
-		
-		<div>
-			<label for="contents">내용</label>
-			<textarea id="contents" name="contents" placeholder="내용" required></textarea>
-		</div>
+
+		<div class="container">
+			<form method="post" enctype="multipart/form-data">
+				<div class="form-group">
+					<div class="container">
+						<label for="title">제목</label>
+						<input type="text" class="form-control" id="title" name="title" placeholder="제목" required/>
+					</div>
+				</div>
 				
-		<div>
-			<label for="name">작성자</label>
-			<input type="text" id="name" name="name" value="${user.name}" readonly="readonly" required>
-		</div>		
-		
-		<div>
-			<label for="identification">아이디</label>
-			<input type="text" id="identification" name="identification" value="${user.identification}" readonly="readonly" required>
-		</div>	
-		
-		<div>
-			<input type="file" name="file">
+				<div class="form-group">
+					<div class="container">
+						<label for="contents">내용</label>
+						<textarea id="contents" class="form-control" rows="10" name="contents" placeholder="내용" required></textarea>
+					</div>
+				</div>
+						
+				<div class="form-group">
+					<div class="container">
+						<label for="name">작성자</label>
+						<input type="text" class="form-control" id="name" name="name" value="${user.name}" readonly="readonly" required>
+					</div>
+				</div>		
+				
+				<div class="form-group">
+					<div class="container">
+						<label for="identification">아이디</label>
+						<input type="text" class="form-control" id="identification" name="identification" value="${user.identification}" readonly="readonly" required>
+					</div>
+				</div>	
+				
+				<div class="form-group">
+					<div class="container">
+						<input type="file" name="file">
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="container">
+					<button type="submit" class="btn btn-primary">등록</button>
+					</div>
+				</div>
+			</form>
 		</div>
-		
-		<div>
-			<button type="submit">등록</button>
-		</div>
-		<div>
-		</div>
-	</form>
-	</c:if>
+
 	
 	<c:if test="${msg == false}">
 		<script>

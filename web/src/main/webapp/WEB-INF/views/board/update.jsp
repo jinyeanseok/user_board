@@ -13,6 +13,11 @@
   
   <style type="text/css">
 			li {list-style: none; float: left; padding: 6px;}
+			
+			 a:link { color: black; text-decoration: none;}
+			 a:visited { color: black; text-decoration: none;}
+			 a:hover { color: blue; text-decoration: underline;}
+			 
 	</style>
 	
 	
@@ -22,33 +27,37 @@
 	<h1 align="center"><a href="/">게시판</a></h1>
 	<hr/>
 	
-	<div>
+	<div class="container">
 	
-	<a href="/board/listPage"><button>목록</button></a>
-	
-	<form action="/board/remove?board_number=${boardVO.board_number}" method="post">
-			<a><button>게시글 삭제</button></a>
-	</form>
-	
+		<c:if test="${user.identification == boardVO.identification }">
+			<form action="/board/remove?board_number=${boardVO.board_number}" method="post">
+					<a><button class="btn btn-danger">게시글 삭제</button></a>
+			</form>
+		</c:if>
 	</div>
-	<hr/>
 	
-
+	<br />
 	
 	<form method="post">
 	<div>
-		<div>
-			<label for="title">제목</label>
-			<input type="text" id="title" name="title" placeholder="제목" value="${boardVO.title }" required/>
+		<div class="form-group">
+			<div class="container">
+				<label for="title">제목</label>
+				<input type="text" class="form-control" id="title" name="title" placeholder="제목" value="${boardVO.title }" required/>
+			</div>
+		</div>
+			
+		<div class="form-group">
+			<div class="container">
+				<label for="contents">내용</label>
+				<textarea id="contents" class="form-control" rows="10" name="contents" placeholder="내용" required>${boardVO.contents}</textarea>
+			</div>
 		</div>
 		
-		<div>
-			<label for="contents">내용</label>
-			<textarea id="contents" name="contents" placeholder="내용" required>${boardVO.contents}</textarea>
-		</div>
-		
-		<div>
-			<button type="submit">저장</button>
+		<div class="form-group">	
+			<div class="container">
+				<button type="submit" class="btn btn-success">저장</button>
+			</div>
 		</div>
 	</div>	
 	</form>

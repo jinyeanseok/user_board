@@ -31,6 +31,7 @@ public class BoardDAOImpl implements BoardDAO {
 	private static String INSERTFILE = NS + ".insertFile";
 	private static String SELECTFILELIST = NS + ".selectFileList";
 	private static String SELECTFILEINFO = NS + ".selectFileInfo";
+	private static String UPDATEFILE = NS + ".updateFile";
 
 	@Override
 	public void create(BoardVO board, MultipartHttpServletRequest mpRequest) throws Exception {
@@ -104,5 +105,10 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception {
 		return session.selectOne(SELECTFILEINFO, map);
+	}
+	
+	@Override
+	public void updateFile(Map<String, Object> map) throws Exception {
+		session.update(UPDATEFILE, map);
 	}
 }

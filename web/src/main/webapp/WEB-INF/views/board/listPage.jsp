@@ -15,6 +15,10 @@
   
   <style type="text/css">
 			li {list-style: none; float: left; padding: 6px;}
+			 a:link { color: black; text-decoration: none;}
+			 a:visited { color: black; text-decoration: none;}
+			 a:hover { color: blue; text-decoration: underline;}
+			 
 	</style>
 	
 <script>
@@ -64,44 +68,14 @@
 
 <body>
 	<h1 align="center"><a href="/">게시판</a></h1>
-	<hr/>
-	
-	
-	
-	<div>
-		<a href="/">처음으로</a>
-	</div>
-	
-	<c:if test="${msg == null}">
-	<div>
-		<!-- 
-		<div class="text-light">
-			<a href="/user/register">회원가입</a>
-		</div>
-		 -->
 		
-		<!--
-		<div class="text-light">
-			<a href="/">로그인</a>
+		<div class="container">
+			<a href="/board/register"><button class="btn btn-primary">글 등록</button></a>
+			<hr/>
 		</div>
-		  -->
 		
-		
-		<a href="/board/register"><button>글 등록</button></a>
-		<hr/>
-	</div>
-	</c:if>
-	
-	<c:if test="${user != null }">
-		<div>
-			${user.name}(${user.identification})님 반갑습니다.
-		</div>
-		<br />
-	</c:if>
-	
-	<c:if test="${msg == null}">
 	<div>
-		<div>
+		<div class="container">
 			<select id="searchTypeSel" name="searchType">
 				<option value="">검색조건</option>
 				<option value="t">제목</option> 
@@ -114,23 +88,22 @@
 			<input type="text" id="keyword" name="keyword"
 				value="${pageMaker.cri.keyword}" placeholder="검색어를 입력하세요" required />
 				
-			<button id="searchBtn" >검색</button>
+			<button id="searchBtn" class="btn btn-warning">검색</button>
 			
 		</div>
 	</div>
-	</c:if>
 	
-	<hr/>
-	
-	<c:if test="${msg == null}">
+	<br/>
+		
+<div class="container">
 	<table class="table table-bordered">
 	
 	<tr>
-		<th style="width: 10px">글 번호</th>
+		<th>글 번호</th>
 		<th>제목</th>
 		<th>작성일자</th>
 		<th>작성자</th>
-		<th style="width: 40px">조회수</th>
+		<th>조회수</th>
 	</tr>
 	
 	
@@ -156,10 +129,8 @@
 	
 	
 	</table>
-	</c:if>
+</div>
 
-
-	<c:if test="${msg == null}">
 	<div class="text-center">
 			<ul class="pagination">
 				<!-- 맨처음 -->
@@ -197,13 +168,12 @@
 				</li>
 			</ul>
 		</div>
-	</c:if>
 
-	<c:if test="${msg == false}">
+<!-- 	<c:if test="${msg == false}">
 			<script>
 				alert("로그인이 필요합니다.");
 			</script>
-	</c:if>
+	</c:if> -->
 	
 	
 	

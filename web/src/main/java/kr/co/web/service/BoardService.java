@@ -35,4 +35,6 @@ public interface BoardService {
 	public List<Map<String, Object>> selectFileList(int board_number) throws Exception;
 	
 	public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception;
+	
+//	public void update(BoardVO board, String[] files, String[] fileNames, MultipartHttpServletRequest mpRequest) throws Exception;
 }
