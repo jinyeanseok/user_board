@@ -27,7 +27,7 @@
 				}
 				
 				 a:link { color: black; text-decoration: none;}
-				 a:visited { color: black; text-decoration: none;}
+				 a:visited { color: white; text-decoration: none;}
 				 a:hover { color: blue; text-decoration: underline;}
 
 
@@ -78,7 +78,7 @@
 					</div>
 				</form>
 			</div>
-			<hr />
+			
 		</article>
 	</body>
 </html>

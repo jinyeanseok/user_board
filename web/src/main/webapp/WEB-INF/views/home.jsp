@@ -25,13 +25,19 @@
 					  left: 50%; 
 					  top: 50%; 
 					  border-radius: 30px;
+					  opacity: 0.8;
 				}
 				
 				 a:link { color: red; text-decoration: none;}
-				 a:visited { color: black; text-decoration: none;}
+				 a:visited { color: white; text-decoration: none;}
 				 a:hover { color: blue; text-decoration: underline;}
 
-
+				#image {
+					background-image:url(https://cdn.pixabay.com/photo/2016/03/09/09/14/books-1245690_960_720.jpg);
+					background-repeat : no-repeat;
+					background-size : cover;
+					background-position: center center;
+				}
 	  </style>
 	
 	<script>
@@ -45,10 +51,15 @@
 	</script>
 	
 </head>
-<body>
+<body id="image">
+
+	
+	
 	<article class="container">
 			<div class="col-md-6 col-md-offset-3">
-				<h1 align="center"><a href="/">게시판</a></h1>
+				<div class="title">
+					<h1 align="center" class="title"><a href="/" class="title">게시판</a></h1>
+				</div>
 			</div>
 	<!-- 
 	<a href="/board/register">글 작성</a><br />
@@ -70,7 +81,7 @@
 				 
 				 <div class="form-group text-center">
 				 	<button type="submit" class="btn btn-success btn-block">로그인</button>
-				 	<a href="/user/register" class="btn btn-primary btn-block">회원가입</a>
+				 	<button type="button" class="btn btn-primary btn-block" onclick="location.href='/user/register'">회원가입</button>
 				 </div>
 			</form>
 		</div>
@@ -123,11 +134,12 @@
 		<br/>
 		<br/>
 		<br/>
-		<a href="/board/register" class="btn btn-success btn-block">글 작성</a>
-		<a href="/board/listPage" class="btn btn-info btn-block">글목록</a>
-		<a href="/user/modify" class="btn btn-primary btn-block">회원정보 수정</a>
-		<a href="/user/logout" class="btn btn-warning btn-block">로그아웃</a>
-		<a href="/user/delete" class="btn btn-danger btn-block">회원탈퇴</a>
+			
+		<button type="button" class="btn btn-success btn-block" onclick="location.href='/board/register'">글 작성 </button>
+		<button type="button" class="btn btn-info btn-block" onclick="location.href='/board/listPage'">글목록 </button>
+		<button type="button" class="btn btn-primary btn-block" onclick="location.href='/user/modify'">회원정보 수정 </button>
+		<button type="button" class="btn btn-warning btn-block" onclick="location.href='/user/logout'">로그아웃 </button>
+		<button type="button" class="btn btn-danger btn-block" onclick="location.href='/user/delete'">회원탈퇴 </button>
 	</c:if>
 	
 	<c:if test="${msg == 'deleteOK' }">

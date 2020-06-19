@@ -8,26 +8,25 @@
 <meta charset="UTF-8">
 <title>게시판</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   
 	  <style type="text/css">
 				li {list-style: none; float: left; padding: 6px;}
 				
-				 a:link { color: black; text-decoration: none;}
-				 a:visited { color: black; text-decoration: none;}
-				 a:hover { color: blue; text-decoration: underline;}
+				a:link { color: black; text-decoration: none;}
+				a:visited { color: black; text-decoration: none;}
+				a:hover { color: blue; text-decoration: underline;}
+				
+				h1 { padding: 40px}
+				 
 	  </style>
 </head>
 <body>
-	<h1 align="center"><a href="/">게시판</a></h1>
+	<h1 align="center"><a href="/">게시판</a></h1><hr />
 	
 	<!-- <c:if test="${msg == null}">
 	<a href="/board/listPage"><button>목록</button></a>
 	</c:if> -->
-
-	
-
 
 		<div class="container">
 			<form method="post" enctype="multipart/form-data">

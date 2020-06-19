@@ -24,7 +24,18 @@
 			  left: 50%; 
 			  top: 50%; 
 			  border-radius: 30px;
+			  opacity: 0.8;
 			}
+			
+			 a:link { color: black; text-decoration: none;}
+		     a:visited { color: white; text-decoration: none;}
+			 a:hover { color: blue; text-decoration: underline;}
+			 
+			 #image {
+					background-image:url(https://images.unsplash.com/photo-1592436259520-52462868641c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80);
+					background-repeat : no-repeat;
+					background-size : cover;
+				}
   </style>
   
  
@@ -48,7 +59,7 @@
 		}
 	</script>
 </head>
-<body>
+<body id="image">
 	<div class="auth-form px-3">
 	<article class="container">
 			<div class="col-md-6 col-md-offset-3">

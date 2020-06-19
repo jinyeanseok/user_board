@@ -19,6 +19,42 @@
 			 a:hover { color: blue; text-decoration: underline;}
 			 
 			 .comment{font-size: 2em;}
+			 h1 { padding: 40px}
+			 
+			 .parent { 
+			 	  border: 1px;
+				  display: grid; 
+				  grid-template-areas:
+				    "i1 i2 i3"
+				    "i4 i4 i4";
+				    
+				}
+				.item-1 {
+				  grid-area: i1;
+			
+				}
+				.item-2 {
+				  grid-area: i2;
+		
+				}
+				.item-3 {
+				  grid-area: i3;
+				  text-align: right;
+		
+				}
+				.item-4 {
+				  grid-area: i4;
+				  
+				}
+				
+				.item-1, .item-2, .item-3, .item-4 {
+			        padding: 1rem;
+			        border: 2px solid #aaa;
+			    }
+
+									 
+				
+			
 	</style>
 	
   <script>
@@ -82,13 +118,13 @@
 	
 </head>
 <body>
-	<h1 align="center"><a href="/">게시판</a></h1>
-	<hr/>
+	<h1 align="center"><a href="/">게시판</a></h1><hr />
 	
 	<div class="container">
 		<c:if test="${user.identification == boardVO.identification }">
 		<form action="/board/remove?board_number=${boardVO.board_number}" method="post">
-			<a><button class="btn btn-danger">게시글 삭제</button></a>
+			<a><button class="btn btn-danger">삭제</button></a>
+			<hr />
 		</form>
 		</c:if>
 	</div>
@@ -137,10 +173,10 @@
 		
 			<div class="form-group">
 				<div class="container">
-					<span>파일 목록</span><br />
+					<label>파일 목록</label><br />
 					<c:forEach var="file" items="${file}">
 						<!-- <a href=# onclick="fn_fileDown('${file.file_number}'); return false;">${file.org_file_name}</a>(${file.file_size}kb)<br> -->
-						<a href="#" onclick="fn_fileDown('${file.file_number}'); return false;">${file.org_file_name}</a>(${file.file_size}kb)<br>
+						- <a href="#" onclick="fn_fileDown('${file.file_number}'); return false;">${file.org_file_name}</a>(${file.file_size}kb)<br>
 					</c:forEach>
 					
 				</div>
@@ -188,25 +224,42 @@
 			
 		    <c:forEach items="${replyList}" var="replyList">
 		      
-		        <div class="container">
+		        <!-- <div class="container">
 		  	                 작성자 : ${replyList.replyer}<br />
 		  	      	   작성 날짜 :  <fmt:formatDate value="${replyList.create_date}" pattern="yyyy-MM-dd" /> <br />
 		  	      	   댓글 : ${replyList.replytext}
-		        </div>
+		        </div> -->
+		    
+		        <div class="container">
+			        <div class="parent">   	
+						  <div class="item-1">${replyList.replyer}</div> 
+						  <div class="item-2"><fmt:formatDate value="${replyList.create_date}" pattern="yyyy-MM-dd" /></div> 
+						  <div class="item-3">
+							  <c:if test="${user.identification == replyList.replyer }"> <!-- boardVO.identification는 글작성한 사람 아이디, user.identification는 로그인한 사람 아이디 -->
+							  	<button type="button" class="replyUpdateBtn btn btn-success" data-rno="${replyList.reply_number}">수정</button>
+								<button type="button" class="replyDeleteBtn btn btn-danger" data-rno="${replyList.reply_number}">삭제</button>
+						   	  </c:if>
+						</div>	
+						  <div class="item-4">${replyList.replytext}</div> 
+					
+					</div>
+				</div>
+			
+						        
 		        
-		        <br />
-		     
-		       
+		               
+		               <br />
 		       <div>
 		       		<!-- <div>로그인한 이용자 : ${user.identification } </div> -->
 		       		<!-- <div>댓글 작성자 : ${replyList.replyer}</div> -->
 		       		
-				   <c:if test="${user.identification == replyList.replyer }"> <!-- boardVO.identification는 글작성한 사람 아이디, user.identification는 로그인한 사람 아이디 -->
+				   <!-- <c:if test="${user.identification == replyList.replyer }"> 
 					 <div class="container">
 						 <button type="button" class="replyUpdateBtn btn btn-success" data-rno="${replyList.reply_number}">수정</button>
 						 <button type="button" class="replyDeleteBtn btn btn-danger" data-rno="${replyList.reply_number}">삭제</button>
+						 <hr />
 					 </div>
-				   </c:if>
+				   </c:if> -->
 				</div>
 				<br />
 				<br />

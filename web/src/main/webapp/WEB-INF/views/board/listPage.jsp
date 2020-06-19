@@ -19,6 +19,10 @@
 			 a:visited { color: black; text-decoration: none;}
 			 a:hover { color: blue; text-decoration: underline;}
 			 
+			 th { text-align: center; }
+			 table { text-align: center; }
+			 h1 { padding: 40px}
+			 
 	</style>
 	
 <script>
@@ -66,8 +70,8 @@
 </script>
 </head>
 
-<body>
-	<h1 align="center"><a href="/">게시판</a></h1>
+<body id="image">
+	<h1 align="center"><a href="/">게시판</a></h1><hr />
 		
 		<div class="container">
 			<a href="/board/register"><button class="btn btn-primary">글 등록</button></a>
